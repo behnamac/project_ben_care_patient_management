@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/button";
 import { Doctors } from "@/constants";
 import { getAppointment } from "@/lib/actions/appointment.actions";
@@ -19,7 +20,7 @@ const RequestSuccess = async ({ searchParams, params }: SearchParamProps) => {
 
   return (
     <div className=" flex h-screen max-h-screen px-[5%]">
-      <div className="success-img">
+      <Reveal className="success-img" stagger={0.12}>
         <Link href="/">
           <Image
             src="/assets/icons/logo-icon.svg"
@@ -79,7 +80,7 @@ const RequestSuccess = async ({ searchParams, params }: SearchParamProps) => {
         </Button>
 
         <p className="copyright">© 2025 BenCare</p>
-      </div>
+      </Reveal>
     </div>
   );
 };

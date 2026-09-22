@@ -7,6 +7,8 @@ import { EASE, REDUCED, gsap, useGSAP } from "@/lib/gsap";
 type CountUpProps = {
   value: number;
   duration?: number;
+  /** Hold off until the card carrying the number has faded in. */
+  delay?: number;
   className?: string;
 };
 
@@ -14,7 +16,12 @@ type CountUpProps = {
  * Counts from 0 up to `value` on mount. The real value is server-rendered, so
  * it stays correct without JS and under reduced motion.
  */
-export const CountUp = ({ value, duration = 1.2, className }: CountUpProps) => {
+export const CountUp = ({
+  value,
+  duration = 1.2,
+  delay = 0.3,
+  className,
+}: CountUpProps) => {
   const el = useRef<HTMLSpanElement>(null);
 
   useGSAP(
@@ -28,6 +35,7 @@ export const CountUp = ({ value, duration = 1.2, className }: CountUpProps) => {
       gsap.to(counter, {
         value,
         duration,
+        delay,
         ease: EASE,
         snap: { value: 1 },
         onUpdate: () => {
@@ -35,7 +43,7 @@ export const CountUp = ({ value, duration = 1.2, className }: CountUpProps) => {
         },
       });
     },
-    { dependencies: [value, duration], revertOnUpdate: true }
+    { dependencies: [value, duration, delay], revertOnUpdate: true }
   );
 
   return (

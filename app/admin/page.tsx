@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { StatCard } from "@/components/StatCard";
 import { columns } from "@/components/table/columns";
 import { DataTable } from "@/components/table/DataTable";
@@ -11,7 +12,7 @@ const AdminPage = async () => {
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
-      <header className="admin-header">
+      <Reveal as="header" className="admin-header" y={-16}>
         <Link href="/" className="cursor-pointer">
           <Image
             src="/assets/icons/logo-icon.svg"
@@ -23,17 +24,17 @@ const AdminPage = async () => {
         </Link>
 
         <p className="text-16-semibold">Admin Dashboard</p>
-      </header>
+      </Reveal>
 
       <main className="admin-main">
-        <section className="w-full space-y-4">
+        <Reveal as="section" className="w-full space-y-4" delay={0.1}>
           <h1 className="header">Welcome 👋</h1>
           <p className="text-dark-700">
             Start the day with managing new appointments
           </p>
-        </section>
+        </Reveal>
 
-        <section className="admin-stat">
+        <Reveal as="section" className="admin-stat" stagger={0.08} delay={0.2}>
           <StatCard
             type="appointments"
             count={appointments?.scheduledCount || 0}
@@ -52,9 +53,11 @@ const AdminPage = async () => {
             label="Cancelled appointments"
             icon={"/assets/icons/cancelled.svg"}
           />
-        </section>
+        </Reveal>
 
-        <DataTable columns={columns} data={appointments?.documents || []} />
+        <Reveal delay={0.35} className="w-full">
+          <DataTable columns={columns} data={appointments?.documents || []} />
+        </Reveal>
       </main>
     </div>
   );

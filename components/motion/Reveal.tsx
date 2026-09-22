@@ -2,89 +2,41 @@
 
 import { useRef } from "react";
 
-import {
-  DURATION,
-  EASE,
-  FULL_MOTION,
-  REDUCED,
-  gsap,
-  useGSAP,
-} from "@/lib/gsap";
+import { useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
-type RevealProps = {
+import { revealTween, RevealTweenOptions } from "./revealTween";
+
+type RevealProps = RevealTweenOptions & {
   children: React.ReactNode;
   /** Element to render. Defaults to a div. */
   as?: React.ElementType;
   className?: string;
-  /** Vertical offset to travel from, in px. */
-  y?: number;
-  /** Horizontal offset to travel from, in px. */
-  x?: number;
-  /** Scale to start from, e.g. 0.96 for a subtle pop. */
-  scale?: number;
-  delay?: number;
-  duration?: number;
-  /**
-   * When set, the direct children animate one after another instead of the
-   * container animating as a single block.
-   */
-  stagger?: number;
 };
 
 /**
- * Wraps server-rendered markup in a client-side entrance animation.
- *
- * The element (or its children) ships pre-hidden via `.gsap-hidden` /
- * `.gsap-hidden-children` so the server paint never flashes the content before
- * hydration takes over. See the reduced-motion + noscript fallbacks in
- * app/globals.css and app/layout.tsx.
+ * Wraps server-rendered markup in a client-side entrance animation. Pass
+ * `stagger` to cascade the direct children instead of animating the wrapper as
+ * a single block.
  */
 export const Reveal = ({
   children,
   as: Tag = "div",
   className,
-  y = 16,
-  x = 0,
-  scale = 1,
-  delay = 0,
-  duration = DURATION,
-  stagger,
+  ...tween
 }: RevealProps) => {
-  const container = useRef<HTMLElement>(null);
+  const container = useRef<HTMLDivElement>(null);
+  const isStaggered = Boolean(tween.stagger);
 
   useGSAP(
     () => {
-      const targets = stagger
-        ? Array.from(container.current?.children ?? [])
-        : container.current;
+      const root = container.current;
+      if (!root) return;
 
-      if (!targets || (Array.isArray(targets) && targets.length === 0)) return;
+      const targets = isStaggered ? Array.from(root.children) : root;
+      if (Array.isArray(targets) && targets.length === 0) return;
 
-      const mm = gsap.matchMedia();
-
-      mm.add(REDUCED, () => {
-        gsap.set(targets, { clearProps: "all", autoAlpha: 1 });
-      });
-
-      mm.add(FULL_MOTION, () => {
-        gsap.fromTo(
-          targets,
-          { autoAlpha: 0, y, x, scale },
-          {
-            autoAlpha: 1,
-            y: 0,
-            x: 0,
-            scale: 1,
-            duration,
-            delay,
-            stagger,
-            ease: EASE,
-            clearProps: "transform",
-          }
-        );
-      });
-
+      const mm = revealTween(targets, tween);
       return () => mm.revert();
     },
     { scope: container }
@@ -94,7 +46,7 @@ export const Reveal = ({
     <Tag
       ref={container}
       className={cn(
-        stagger ? "gsap-hidden-children" : "gsap-hidden",
+        isStaggered ? "gsap-hidden-children" : "gsap-hidden",
         className,
       )}
     >

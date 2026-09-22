@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { PatientForm } from "@/components/forms/PatientForm";
 import { Reveal } from "@/components/motion/Reveal";
+import { RevealImage } from "@/components/motion/RevealImage";
 import { PasskeyModal } from "@/components/PasskeyModal";
 
 const Home = async ({ searchParams }: SearchParamProps) => {
@@ -15,15 +15,14 @@ const Home = async ({ searchParams }: SearchParamProps) => {
 
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
-          <Reveal y={-12}>
-            <Image
-              src="/assets/icons/logo-icon.svg"
-              height={1000}
-              width={1000}
-              alt="patient"
-              className="mb-12 h-10 w-fit"
-            />
-          </Reveal>
+          <RevealImage
+            src="/assets/icons/logo-icon.svg"
+            height={1000}
+            width={1000}
+            alt="patient"
+            className="mb-12 h-10 w-fit"
+            y={-12}
+          />
 
           <PatientForm />
 
@@ -46,21 +45,16 @@ const Home = async ({ searchParams }: SearchParamProps) => {
         </div>
       </section>
 
-      <Reveal
-        as="aside"
+      <RevealImage
+        src="/assets/images/onboarding-img.png"
+        height={1000}
+        width={1000}
+        alt="patient"
+        className="side-img max-w-[50%]"
         x={24}
         y={0}
         duration={0.7}
-        className="side-img max-w-[50%]"
-      >
-        <Image
-          src="/assets/images/onboarding-img.png"
-          height={1000}
-          width={1000}
-          alt="patient"
-          className="size-full object-cover"
-        />
-      </Reveal>
+      />
     </div>
   );
 };

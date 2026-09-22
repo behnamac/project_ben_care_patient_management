@@ -1,6 +1,6 @@
-import Image from "next/image";
-
 import { AppointmentForm } from "@/components/forms/AppointmentForm";
+import { Reveal } from "@/components/motion/Reveal";
+import { RevealImage } from "@/components/motion/RevealImage";
 import { getPatient } from "@/lib/actions/patient.actions";
 
 const Appointment = async ({ params }: SearchParamProps) => {
@@ -12,12 +12,13 @@ const Appointment = async ({ params }: SearchParamProps) => {
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
-          <Image
+          <RevealImage
             src="/assets/icons/logo-icon.svg"
             height={1000}
             width={1000}
             alt="logo"
             className="mb-12 h-10 w-fit"
+            y={-12}
           />
 
           {patient?.id && (
@@ -28,16 +29,21 @@ const Appointment = async ({ params }: SearchParamProps) => {
             />
           )}
 
-          <p className="copyright mt-10 py-12">© 2025 BenCare</p>
+          <Reveal delay={0.35}>
+            <p className="copyright mt-10 py-12">© 2025 BenCare</p>
+          </Reveal>
         </div>
       </section>
 
-      <Image
+      <RevealImage
         src="/assets/images/appointment-img.png"
         height={1500}
         width={1500}
         alt="appointment"
         className="side-img max-w-[390px] bg-bottom"
+        x={24}
+        y={0}
+        duration={0.7}
       />
     </div>
   );
