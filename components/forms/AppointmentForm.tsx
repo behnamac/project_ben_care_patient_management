@@ -14,6 +14,14 @@ import {
   createAppointment,
   updateAppointment,
 } from "@/lib/actions/appointment.actions";
+import {
+  DURATION,
+  EASE,
+  FULL_MOTION,
+  REDUCED,
+  gsap,
+  useGSAP,
+} from "@/lib/gsap";
 import { getAppointmentSchema } from "@/lib/validation";
 import { Appointment } from "@/types/prisma.types";
 

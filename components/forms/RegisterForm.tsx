@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -14,6 +14,14 @@ import { SelectItem } from "@/components/ui/select";
 import { Doctors, GenderOptions, PatientFormDefaultValues } from "@/constants";
 import { getDemoPatient } from "@/constants/demoData";
 import { registerPatient } from "@/lib/actions/patient.actions";
+import {
+  DURATION,
+  EASE,
+  FULL_MOTION,
+  REDUCED,
+  gsap,
+  useGSAP,
+} from "@/lib/gsap";
 import { PatientFormValidation } from "@/lib/validation";
 
 import "react-datepicker/dist/react-datepicker.css";

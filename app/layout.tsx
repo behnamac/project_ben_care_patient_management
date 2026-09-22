@@ -29,6 +29,11 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        {/* Entrance animations ship pre-hidden; without JS they must still show. */}
+        <noscript>
+          <style>{`.gsap-hidden,.gsap-hidden-children>*{visibility:visible!important}`}</style>
+        </noscript>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

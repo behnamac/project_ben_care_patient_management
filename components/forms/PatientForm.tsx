@@ -2,13 +2,21 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Form } from "@/components/ui/form";
 import { getDemoUser } from "@/constants/demoData";
 import { createUser } from "@/lib/actions/patient.actions";
+import {
+  DURATION,
+  EASE,
+  FULL_MOTION,
+  REDUCED,
+  gsap,
+  useGSAP,
+} from "@/lib/gsap";
 import { UserFormValidation } from "@/lib/validation";
 
 import "react-phone-number-input/style.css";
@@ -57,12 +65,6 @@ export const PatientForm = () => {
         <section className="mb-12 space-y-4">
           <h1 className="header">Hi there 👋</h1>
           <p className="text-dark-700">Get started with appointments.</p>
-          <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
-            <p className="text-sm text-blue-800">
-              🔒 <strong>Secure Platform:</strong> Your information is protected
-              with encryption and security measures.
-            </p>
-          </div>
 
           <DemoFillButton onFill={() => form.reset(getDemoUser())} />
         </section>

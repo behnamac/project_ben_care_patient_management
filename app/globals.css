@@ -38,6 +38,24 @@
 }
 
 @layer utilities {
+  /* ===== GSAP ENTRANCE ANIMATIONS */
+  /* Pre-hide server-rendered markup so hydration never flashes it. GSAP tweens
+     autoAlpha, which restores visibility on its own. */
+  .gsap-hidden {
+    visibility: hidden;
+  }
+
+  .gsap-hidden-children > * {
+    visibility: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gsap-hidden,
+    .gsap-hidden-children > * {
+      visibility: visible !important;
+    }
+  }
+
   /* ===== UTILITIES */
   .sidebar {
     @apply remove-scrollbar w-full max-w-72 flex-col overflow-auto bg-black-800 px-7 py-10;
