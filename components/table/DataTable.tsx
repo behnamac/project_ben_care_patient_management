@@ -9,8 +9,9 @@ import {
 } from "@tanstack/react-table";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
+import { useStaggerChildren } from "@/components/motion/useStaggerChildren";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -52,8 +53,20 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const tableRef = useRef<HTMLDivElement>(null);
+  const { pageIndex } = table.getState().pagination;
+
+  // Re-cascade the rows whenever the visible page changes.
+  useStaggerChildren(tableRef, {
+    selector: "tbody tr",
+    stagger: 0.03,
+    duration: 0.3,
+    y: 8,
+    dependencies: [pageIndex, data],
+  });
+
   return (
-    <div className="data-table">
+    <div ref={tableRef} className="data-table gsap-hidden-rows">
       <Table className="shad-table">
         <TableHeader className=" bg-dark-200">
           {table.getHeaderGroups().map((headerGroup) => (

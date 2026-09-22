@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         {/* Entrance animations ship pre-hidden; without JS they must still show. */}
         <noscript>
-          <style>{`.gsap-hidden,.gsap-hidden-children>*{visibility:visible!important}`}</style>
+          <style>{`.gsap-hidden,.gsap-hidden-children>*,.gsap-hidden-rows tbody tr{visibility:visible!important}`}</style>
         </noscript>
 
         <ThemeProvider

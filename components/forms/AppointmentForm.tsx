@@ -3,10 +3,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useStaggerChildren } from "@/components/motion/useStaggerChildren";
 import { SelectItem } from "@/components/ui/select";
 import { Doctors } from "@/constants";
 import { getDemoAppointment } from "@/constants/demoData";
@@ -14,14 +15,6 @@ import {
   createAppointment,
   updateAppointment,
 } from "@/lib/actions/appointment.actions";
-import {
-  DURATION,
-  EASE,
-  FULL_MOTION,
-  REDUCED,
-  gsap,
-  useGSAP,
-} from "@/lib/gsap";
 import { getAppointmentSchema } from "@/lib/validation";
 import { Appointment } from "@/types/prisma.types";
 
@@ -47,6 +40,9 @@ export const AppointmentForm = ({
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useStaggerChildren(formRef);
 
   const AppointmentFormValidation = getAppointmentSchema(type);
 
@@ -142,7 +138,11 @@ export const AppointmentForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
+      <form
+        ref={formRef}
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex-1 space-y-6"
+      >
         {type === "create" && (
           <section className="mb-12 space-y-4">
             <h1 className="header">New Appointment</h1>

@@ -6,17 +6,10 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useStaggerChildren } from "@/components/motion/useStaggerChildren";
 import { Form } from "@/components/ui/form";
 import { getDemoUser } from "@/constants/demoData";
 import { createUser } from "@/lib/actions/patient.actions";
-import {
-  DURATION,
-  EASE,
-  FULL_MOTION,
-  REDUCED,
-  gsap,
-  useGSAP,
-} from "@/lib/gsap";
 import { UserFormValidation } from "@/lib/validation";
 
 import "react-phone-number-input/style.css";
@@ -27,6 +20,9 @@ import SubmitButton from "../SubmitButton";
 export const PatientForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useStaggerChildren(formRef);
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
@@ -61,7 +57,11 @@ export const PatientForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
+      <form
+        ref={formRef}
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex-1 space-y-6"
+      >
         <section className="mb-12 space-y-4">
           <h1 className="header">Hi there 👋</h1>
           <p className="text-dark-700">Get started with appointments.</p>

@@ -49,9 +49,14 @@
     visibility: hidden;
   }
 
+  .gsap-hidden-rows tbody tr {
+    visibility: hidden;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .gsap-hidden,
-    .gsap-hidden-children > * {
+    .gsap-hidden-children > *,
+    .gsap-hidden-rows tbody tr {
       visibility: visible !important;
     }
   }
