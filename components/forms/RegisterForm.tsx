@@ -81,7 +81,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       <form
         ref={formRef}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex-1 space-y-12"
+        className="gsap-hidden-children flex-1 space-y-12"
       >
         <section className="space-y-4">
           <h1 className="header">Welcome 👋</h1>

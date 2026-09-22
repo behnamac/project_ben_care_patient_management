@@ -7,8 +7,7 @@ const DemoFillButton = ({ onFill, label }: DemoFillButtonProps) => {
   return (
     <div className="rounded-lg border border-blue-200 bg-blue-50 p-3">
       <p className="text-sm font-medium text-blue-800">
-        👋 <strong>Just looking around?</strong> Fill this form with sample data
-        instead of typing it out.
+        <strong>Just looking around?</strong> Fill this form with sample data.
       </p>
       <button
         type="button"
