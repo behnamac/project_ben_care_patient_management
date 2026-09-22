@@ -7,11 +7,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Form } from "@/components/ui/form";
+import { getDemoUser } from "@/constants/demoData";
 import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
 
 import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
+import DemoFillButton from "../DemoFillButton";
 import SubmitButton from "../SubmitButton";
 
 export const PatientForm = () => {
@@ -61,6 +63,8 @@ export const PatientForm = () => {
               with encryption and security measures.
             </p>
           </div>
+
+          <DemoFillButton onFill={() => form.reset(getDemoUser())} />
         </section>
 
         <CustomFormField

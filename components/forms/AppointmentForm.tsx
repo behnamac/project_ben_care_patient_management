@@ -9,6 +9,7 @@ import { z } from "zod";
 
 import { SelectItem } from "@/components/ui/select";
 import { Doctors } from "@/constants";
+import { getDemoAppointment } from "@/constants/demoData";
 import {
   createAppointment,
   updateAppointment,
@@ -19,6 +20,7 @@ import { Appointment } from "@/types/prisma.types";
 import "react-datepicker/dist/react-datepicker.css";
 
 import CustomFormField, { FormFieldType } from "../CustomFormField";
+import DemoFillButton from "../DemoFillButton";
 import SubmitButton from "../SubmitButton";
 import { Form } from "../ui/form";
 
@@ -139,6 +141,8 @@ export const AppointmentForm = ({
             <p className="text-dark-700">
               Request a new appointment in 10 seconds.
             </p>
+
+            <DemoFillButton onFill={() => form.reset(getDemoAppointment())} />
           </section>
         )}
 
