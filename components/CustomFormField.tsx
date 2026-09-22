@@ -98,6 +98,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
               id={props.name}
               checked={field.value}
               onCheckedChange={field.onChange}
+              className="shad-checkbox"
             />
             <label htmlFor={props.name} className="checkbox-label">
               {props.label}
