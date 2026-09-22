@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { BrandLink } from "@/components/BrandLink";
 import { PatientForm } from "@/components/forms/PatientForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealImage } from "@/components/motion/RevealImage";
@@ -15,14 +16,9 @@ const Home = async ({ searchParams }: SearchParamProps) => {
 
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
-          <RevealImage
-            src="/assets/icons/logo-icon.svg"
-            height={1000}
-            width={1000}
-            alt="patient"
-            className="mb-12 h-10 w-fit"
-            y={-12}
-          />
+          <Reveal className="mb-12 w-fit" y={-12}>
+            <BrandLink />
+          </Reveal>
 
           <PatientForm />
 

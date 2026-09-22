@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 
+import { BrandLink } from "@/components/BrandLink";
 import RegisterForm from "@/components/forms/RegisterForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealImage } from "@/components/motion/RevealImage";
@@ -17,14 +18,9 @@ const Register = async ({ params }: SearchParamProps) => {
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container">
         <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
-          <RevealImage
-            src="/assets/icons/logo-icon.svg"
-            height={1000}
-            width={1000}
-            alt="patient"
-            className="mb-12 h-10 w-fit"
-            y={-12}
-          />
+          <Reveal className="mb-12 w-fit" y={-12}>
+            <BrandLink />
+          </Reveal>
 
           {user && <RegisterForm user={user} />}
 

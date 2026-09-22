@@ -1,6 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
 
+import { BrandLink } from "@/components/BrandLink";
 import { Reveal } from "@/components/motion/Reveal";
 import { StatCard } from "@/components/StatCard";
 import { columns } from "@/components/table/columns";
@@ -13,15 +12,10 @@ const AdminPage = async () => {
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
       <Reveal as="header" className="admin-header" y={-16}>
-        <Link href="/" className="cursor-pointer">
-          <Image
-            src="/assets/icons/logo-icon.svg"
-            height={32}
-            width={162}
-            alt="logo"
-            className="h-8 w-fit"
-          />
-        </Link>
+        <BrandLink
+          logoClassName="h-8 w-fit"
+          titleClassName="text-18-bold text-white"
+        />
 
         <p className="text-16-semibold">Admin Dashboard</p>
       </Reveal>

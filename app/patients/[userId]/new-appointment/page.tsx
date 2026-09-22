@@ -1,3 +1,4 @@
+import { BrandLink } from "@/components/BrandLink";
 import { AppointmentForm } from "@/components/forms/AppointmentForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealImage } from "@/components/motion/RevealImage";
@@ -12,14 +13,9 @@ const Appointment = async ({ params }: SearchParamProps) => {
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
-          <RevealImage
-            src="/assets/icons/logo-icon.svg"
-            height={1000}
-            width={1000}
-            alt="logo"
-            className="mb-12 h-10 w-fit"
-            y={-12}
-          />
+          <Reveal className="mb-12 w-fit" y={-12}>
+            <BrandLink />
+          </Reveal>
 
           {patient?.id && (
             <AppointmentForm

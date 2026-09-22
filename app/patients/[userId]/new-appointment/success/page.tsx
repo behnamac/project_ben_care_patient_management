@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { BrandLink } from "@/components/BrandLink";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/button";
 import { Doctors } from "@/constants";
@@ -21,15 +22,7 @@ const RequestSuccess = async ({ searchParams, params }: SearchParamProps) => {
   return (
     <div className=" flex h-screen max-h-screen px-[5%]">
       <Reveal className="success-img" stagger={0.12}>
-        <Link href="/">
-          <Image
-            src="/assets/icons/logo-icon.svg"
-            height={1000}
-            width={1000}
-            alt="logo"
-            className="h-10 w-fit"
-          />
-        </Link>
+        <BrandLink />
 
         <section className="flex flex-col items-center">
           <Image
