@@ -60,7 +60,7 @@ export const PatientForm = () => {
       <form
         ref={formRef}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="gsap-hidden-children flex-1 space-y-6"
+        className="gsap-hidden-children flex-1 space-y-4"
       >
         <section className="mb-12 space-y-4">
           <h1 className="header">Hi there 👋</h1>

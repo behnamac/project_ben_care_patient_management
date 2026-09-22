@@ -11,12 +11,12 @@ const Home = async ({ searchParams }: SearchParamProps) => {
   const isAdmin = resolvedSearchParams?.admin === "true";
 
   return (
-    <div className="flex h-screen max-h-screen">
+    <div className="flex h-screen max-h-screen overflow-hidden">
       {isAdmin && <PasskeyModal />}
 
       <section className="remove-scrollbar container my-auto">
-        <div className="sub-container max-w-[496px]">
-          <Reveal className="mb-12 w-fit" y={-12}>
+        <div className="sub-container max-w-[496px] py-6">
+          <Reveal className="mb-6 w-fit" y={-12}>
             <BrandLink />
           </Reveal>
 
@@ -24,7 +24,7 @@ const Home = async ({ searchParams }: SearchParamProps) => {
 
           <Reveal
             delay={0.35}
-            className="text-14-regular mt-20 flex justify-between"
+            className="text-14-regular mt-4 flex justify-between pt-6"
           >
             <div className="flex flex-col">
               <p className="justify-items-end text-dark-600 xl:text-left">
